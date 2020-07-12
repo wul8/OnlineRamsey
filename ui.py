@@ -1,5 +1,5 @@
 import wx
-
+import olRamseyNumber
 class ExamplePanel(wx.Frame):
 
     def __init__(self, parent,id):
@@ -28,11 +28,11 @@ class ExamplePanel(wx.Frame):
         # the edit control - one line version.
         lblname = wx.StaticText(p, label= "Path Length :")
         grid.Add(lblname, pos=(1,0))
-        self.editname = wx.TextCtrl(p, value="Enter here your name", size=(140,-1))
+        self.editname = wx.TextCtrl(p, value="Enter here length of Path", size=(140,-1))
         grid.Add(self.editname, pos=(1,1))
         self.Bind(wx.EVT_TEXT, self.EvtText, self.editname)
 
-        resultName = wx.StaticText(p,label = "OL Ramsey Number:    ")
+        resultName = wx.StaticText(p,label = "OL Ramsey Number:   ")
         grid.Add(resultName,pos = (2,0))
 
         # A button
@@ -51,8 +51,8 @@ class ExamplePanel(wx.Frame):
 
 
     def OnClick(self, event):
-        self.output = self.input
-        self.resultText.SetLabel(str(self.output))
+        self.output = olRamseyNumber.get_online_ramsey_number(int(self.input))
+        self.resultText.SetLabel(self.output)
 
     def EvtText(self, event):
         self.input = event.GetString()

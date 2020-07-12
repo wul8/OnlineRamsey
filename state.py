@@ -41,8 +41,6 @@ class state:
     def colorList(self):
         return self.colors
 
-    def get_step_number(self):
-        return self.step
 
     def connect_node(self,indexA,indexB,colorName):
         """
@@ -141,7 +139,7 @@ class state:
         """
 
         for preState in lst:
-            if preState.get_step_number() == self.get_step_number() and preState.len() == self.len() and \
+            if preState.step == self.step and preState.len() == self.len() and \
                     self.isIsomorphicTo(preState):
                 return preState
         return None
@@ -151,7 +149,7 @@ class state:
 
     def get_online_ramsey_number(self,limit):
         if self.maxLength >= limit:
-            return self.get_step_number()
+            return self.step
         minNumber = float("inf")
         for category in self.successorStates:
             maxNumber = float("-inf")
