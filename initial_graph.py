@@ -16,5 +16,5 @@ def startGraph_2():
     graph.add_edge(2,3,color = "red")
     graph.add_edge(3,4,color = "blue")
     graph.add_node(5)
-    graph.add_edge(5)
+    graph.add_edge(3,5,color = "blue")
     return graph

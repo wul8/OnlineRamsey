@@ -18,12 +18,17 @@ class state:
         self.step = step
         self.maxLength = 0
         self.colorsMappings = self.generate_colors_mapping()
+        self.minStep = 0
+
 
     def __deepcopy__(self, memodict={}):
         copy_object = state(self.graph.copy(),self.colors,self.step)
         copy_object.colorsMappings = self.colorsMappings
         copy_object.maxLength = self.maxLength
         return copy_object
+
+    def updateSuccessorMin(self,minStep):
+        self.minStep = minStep
 
     def generate_colors_mapping(self):
         colorsMappings = []

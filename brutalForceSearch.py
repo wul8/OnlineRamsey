@@ -102,13 +102,17 @@ def brutalForceSearchWithLimit(currentState, step, limit, minNumber):
                         isomorphic_state = nextState.hasIsomorphic(stateList)
                         if isomorphic_state == None:
                             maxNumber1 = max(maxNumber1,brutalForceSearchWithLimit(nextState, step+1, limit, minNumber))
+                        ### if the new state is not isomoprhic, return corresponding minStep
+                        else:
+                            maxNumber1 = max(maxNumber1,isomorphic_state.minStep)
+
                     else:
                         isomorphic_state = nextState.hasIsomorphic(stateList)
                         if isomorphic_state == None:
-                            maxNumber1 = max(maxNumber1,step+1)
-                            plot(nextState)
+                            #plot(nextState)
                             print("max Number:", maxNumber1)
                             stateList.append(nextState)
+                        maxNumber1 = max(maxNumber1, step + 1)
 
             if maxNumber1 != float("-inf"):
                 minNumber = min(maxNumber1,minNumber)
@@ -118,6 +122,8 @@ def brutalForceSearchWithLimit(currentState, step, limit, minNumber):
     # Draw a new node and connect it with the existing node
     for nodeI in range(currentState.len()):
         maxNumber2 = float("-inf")
+
+
         for color in currentState.colorList():
             nextState = copy.deepcopy(currentState)
             nextState.add_node(nodeI, color)
@@ -126,18 +132,22 @@ def brutalForceSearchWithLimit(currentState, step, limit, minNumber):
                 isomorphic_state = nextState.hasIsomorphic(stateList)
                 if isomorphic_state == None:
                     maxNumber2 = max(maxNumber2,brutalForceSearchWithLimit(nextState, step+1, limit, minNumber))
+                ### if the new state is not isomoprhic, return corresponding minStep
+                else:
+                    maxNumber2 = max(maxNumber2, isomorphic_state.minStep)
             else:
                 isomorphic_state = nextState.hasIsomorphic(stateList)
                 if isomorphic_state == None:
-                    maxNumber2 = max(maxNumber2, step+1)
                     print("max Number:",maxNumber2)
-                    plot(nextState)
+                    #plot(nextState)
                     stateList.append(nextState)
+                maxNumber2 = max(maxNumber2, step + 1)
 
         if maxNumber2 != float("-inf"):
             minNumber = min(maxNumber2, minNumber)
             print("minNumber",minNumber)
 
+    currentState.updateSuccessorMin(minNumber)
     return minNumber
 
 
