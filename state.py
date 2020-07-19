@@ -56,6 +56,9 @@ class state:
         self.graph.add_edge(indexA,indexB, color = colorName)
         return True
 
+    def has_edge(self,indexA,indexB):
+        return self.graph.has_edge(indexA,indexB)
+
     def add_node(self,indexA,colorName):
         """
         add extra node and connect it with one existing node

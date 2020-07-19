@@ -8,11 +8,6 @@ print_index = 0
 stateList = []
 start_time = time.time()
 
-def plot(currentState):
-    global print_index
-    print(print_index)
-    print_index = print_index + 1
-    currentState.plot(print_index)
 
 def brutalForceSearch(currentState,step):
     """
@@ -73,25 +68,32 @@ def brutalForceSearch(currentState,step):
     return currentState
 
 
-def brutalForceSearchWithLimit(currentState,step,limit):
+def plot(currentState):
+    global print_index
+    print(print_index)
+    print_index = print_index + 1
+    currentState.plot(print_index)
+
+
+def brutalForceSearchWithLimit(currentState, step, limit, minNumber):
     """
     :param currentState:currentNode
     :param step:
     :return:
     """
-    if step >= 4 * (limit + 1) - 6: return 4 * (limit + 1) - 6
+    if step >= minNumber:
+        return minNumber
 
     global stateList
     stateList.append(currentState)
-    # plot(currentState)
+    plot(currentState)
 
-
-    minNumber = float("inf")
-
+    # Connect Two existing node.
     for nodeI in range(currentState.len()):
         for nodeJ in range(nodeI + 1,currentState.len()):
-            lst = []
+            if currentState.has_edge(nodeI,nodeJ): break
             maxNumber1 = float("-inf")
+            ### The painter now paints color on new edge
             for color in currentState.colorList():
                 nextState = copy.deepcopy(currentState)
                 if nextState.connect_node(nodeI,nodeJ,color):
@@ -99,19 +101,22 @@ def brutalForceSearchWithLimit(currentState,step,limit):
                     if nextState.maxLength < limit:
                         isomorphic_state = nextState.hasIsomorphic(stateList)
                         if isomorphic_state == None:
-                            lst.append(nextState)
-                            brutalForceSearchWithLimit(nextState, step+1, limit)
-                        else:
-                            lst.append(isomorphic_state)
+                            maxNumber1 = max(maxNumber1,brutalForceSearchWithLimit(nextState, step+1, limit, minNumber))
                     else:
-                        maxNumber1 = max(maxNumber1,nextState.step)
+                        isomorphic_state = nextState.hasIsomorphic(stateList)
+                        if isomorphic_state == None:
+                            maxNumber1 = max(maxNumber1,step+1)
+                            plot(nextState)
+                            print("max Number:", maxNumber1)
+                            stateList.append(nextState)
+
             if maxNumber1 != float("-inf"):
                 minNumber = min(maxNumber1,minNumber)
-            if lst:
-                currentState.add_successor_states(lst)
+                print("min Number", minNumber)
 
+
+    # Draw a new node and connect it with the existing node
     for nodeI in range(currentState.len()):
-        lst = []
         maxNumber2 = float("-inf")
         for color in currentState.colorList():
             nextState = copy.deepcopy(currentState)
@@ -120,16 +125,24 @@ def brutalForceSearchWithLimit(currentState,step,limit):
             if nextState.maxLength < limit:
                 isomorphic_state = nextState.hasIsomorphic(stateList)
                 if isomorphic_state == None:
-                    lst.append(nextState)
-                    brutalForceSearchWithLimit(nextState, step+1, limit)
-                else:
-                    lst.append(isomorphic_state)
+                    maxNumber2 = max(maxNumber2,brutalForceSearchWithLimit(nextState, step+1, limit, minNumber))
             else:
-                maxNumber2 = max(maxNumber2, nextState.step)
+                isomorphic_state = nextState.hasIsomorphic(stateList)
+                if isomorphic_state == None:
+                    maxNumber2 = max(maxNumber2, step+1)
+                    print("max Number:",maxNumber2)
+                    plot(nextState)
+                    stateList.append(nextState)
+
         if maxNumber2 != float("-inf"):
             minNumber = min(maxNumber2, minNumber)
-        if lst:
-            currentState.add_successor_states(lst)
+            print("minNumber",minNumber)
+
+    return minNumber
+
+
+
+
 
     # lst = []
     # maxNumber3 = float("-inf")
@@ -153,17 +166,4 @@ def brutalForceSearchWithLimit(currentState,step,limit):
     # if lst:
     #     currentState.add_successor_states(lst)
 
-    return minNumber
 
-# colors = ["red","blue"]
-# initialState = state(initial_graph.startGraph(),colors,1)
-# currentState = brutalForceSearch(initialState,4)
-#
-# for oneState in stateList:
-#     oneState.update_max_path()
-#     print(oneState.maxLength)
-#
-# with open("pickle3.dat", "wb") as f:
-#     pickle.dump(currentState, f)
-#
-# print(time.time()-start_time)
