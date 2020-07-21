@@ -6,8 +6,14 @@ The oneline ramsey problem is to find the minimum number of rounds **R2(H)** req
 ## What's in it
 1. This program, in a step way further, extends simulation of two colors online ramsey game to multicolor online ramsey game in Python using backtracking with alpha beta prunning algorithm. It outputs corresponding online ramsey number.</br>
 2. This program supports simulation with different initial configuration. For example, the program can stimulate R3(P5) (3 color Online Rmasey number of a monochromatic path with 4 verteces) with initial graph P3 (monochronmatic path with 3 vertices)</b4>
+3. This program is able to print out all the simulations as jpg file. See **img** file as example. 
 3. Convinient User Interface for people who might not be familir with python. 
 ## How to run
 1. Part of the scripts have been converted to executable application. Click on start.exe to run. More features will be added on User Interface.
 ## Dependencies
 networkx 3.7 / matplotlib 3.2.1/ pickle 3.8.4 
+## Reference
+[1]J. Beck, Achievement games and the probabilistic method, Combinatorics, Paul Erd˝os is Eighty, Bolyai Soc. Math. Stud. vol. 1, (1993), 51–78.
+[2]E. Friedgut, Y. Kohayakawa, V. R¨odl, A. Ruci´nski and P. Tetali, Ramsey games against one-armed bandit, Combin. Probab. Comput. 12 (2003), 515–545.
+[3]J. Grytczuk, H. Kierstead and P. Pra lat, On-line Ramsey Numbers for Paths and Stars, Discrete Math. Theoretical Comp. Science (submitted, 10pp.)
+[4]P. Pra lat, Programs written in C/C++, http://www.mathstat.dal.ca/~pralat/index.php?page=publications
