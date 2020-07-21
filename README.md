@@ -13,7 +13,7 @@ The oneline ramsey problem is to find the minimum number of rounds **R2(H)** req
 ## Dependencies
 networkx 3.7 / matplotlib 3.2.1/ pickle 3.8.4 
 ## Reference
-[1]J. Beck, Achievement games and the probabilistic method, Combinatorics, Paul Erd˝os is Eighty, Bolyai Soc. Math. Stud. vol. 1, (1993), 51–78.
-[2]E. Friedgut, Y. Kohayakawa, V. R¨odl, A. Ruci´nski and P. Tetali, Ramsey games against one-armed bandit, Combin. Probab. Comput. 12 (2003), 515–545.
-[3]J. Grytczuk, H. Kierstead and P. Pra lat, On-line Ramsey Numbers for Paths and Stars, Discrete Math. Theoretical Comp. Science (submitted, 10pp.)
-[4]P. Pra lat, Programs written in C/C++, http://www.mathstat.dal.ca/~pralat/index.php?page=publications
+[1]J. Beck, Achievement games and the probabilistic method, Combinatorics, Paul Erd˝os is Eighty, Bolyai Soc. Math. Stud. vol. 1, (1993), 51–78. </br>
+[2]E. Friedgut, Y. Kohayakawa, V. R¨odl, A. Ruci´nski and P. Tetali, Ramsey games against one-armed bandit, Combin. Probab. Comput. 12 (2003), 515–545. </br>
+[3]J. Grytczuk, H. Kierstead and P. Pra lat, On-line Ramsey Numbers for Paths and Stars, Discrete Math. Theoretical Comp. Science (submitted, 10pp.) </br>
+[4]P. Pra lat, Programs written in C/C++, http://www.mathstat.dal.ca/~pralat/index.php?page=publications </br>
